@@ -13,3 +13,11 @@ def stdDevOfLengths(L):
   vals = [(e - mean) ** 2 for e in lengths]
 
   return (sum(vals) / len(vals))**.5
+
+
+def coefficient_of_variation(L):
+  mean = sum(L) / len(L)
+  v = (sum([(e - mean)**2 for e in L]) / len(L))**.5
+  return v / mean
+
+print(coefficient_of_variation([10, 4, 12, 15, 20, 5]))
