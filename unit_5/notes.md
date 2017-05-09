@@ -39,3 +39,41 @@ Feature engineering
   - don't overfit
 
 We want to maximize the signal to noise ratio.
+
+## Nearest neighbor
+
+Simple classification algorithm.
+
+When predicting label of new example find nearest example in the training data
+
+Predict label associated with that data.
+
+## k-nearest neighbors (KNN)
+
+Pick some val for k, usually odd. Look at that number of neighbors, choose the label associated with the majority of those neighbors.
+
+## Z-scaling
+
+Each feature has a mean of 0 and a std deviation of 1.
+
+```
+def zScaleFeatures(vals):
+  """ vals - seq. of floats """
+  result = pylab.array(vals)
+  mean = float(sum(result) / len(result))
+  result = result - mean
+  return result / pylab.std(result)
+```
+
+## Interpolation
+
+Map minimum values to 0, max to 1, and linealy interpolate.
+
+This means all features range from 0 to 1.
+
+```
+def iScaleFeatures(vals):
+  minVal, maxVal = min(vals), max(vals)
+  fit = pylab.polyfit([minVal, maxVal], [0, 1], 1)
+  return pylab.polyval(fit, vals)
+```
