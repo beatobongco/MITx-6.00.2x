@@ -36,7 +36,6 @@ def makeHistogram(values, numBins, xLabel, yLabel, title=None):
     pylab.title(title)
   pylab.show()
 
-from collections import Counter
 # Implement this -- Coding Part 2 of 2
 def getAverage(die, numRolls, numTrials):
   """
@@ -51,12 +50,26 @@ def getAverage(die, numRolls, numTrials):
   """
   results = []
   for _ in range(numTrials):
-    r = []
+    rolls = []
     for _ in range(numRolls):
-      r.append(die.roll())
-    results.append(Counter(r).most_common()[0][1])
-    # longest run
-  # makeHistogram(results, 10, 'runs', 'frequency')
+      rolls.append(die.roll())
+
+    king = 0
+    current = None
+    counter = 0
+    for roll in rolls:
+      if current == roll:
+        counter += 1
+      else:
+        current = roll
+        counter = 1
+
+      if counter > king:
+        king = counter
+
+    results.append(king)
+  makeHistogram(results, 10, 'longest runs', 'frequency')
   return getMeanAndStd(results)[0]
 # One test case
-print(getAverage(Die([1,2,3,4,5,6,6,6,7]), 500, 1))
+print(getAverage(Die([1]), 5, 5))
+print(getAverage(Die([1,2,3,4,5,6,6,6,7]), 500, 10000))
