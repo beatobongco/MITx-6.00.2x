@@ -77,3 +77,16 @@ def iScaleFeatures(vals):
   fit = pylab.polyfit([minVal, maxVal], [0, 1], 1)
   return pylab.polyval(fit, vals)
 ```
+
+## k-means clustering
+
+Constraint: exactly k non-empty clusters
+
+```
+randomly choose k examples as initial centroids
+while true:
+  create k clusters by assigning each example to closest centroid
+  compute k new centroids by averaging examples in each cluster
+  if centroids dont change:
+    break
+```
